@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Ari 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:       #e8556d;
+      --rose-dark:  #c93a55;
+      --blush:      #fde8ec;
+      --cream:      #fff8f0;
+      --text:       #4a2030;
+      --muted:      #b07080;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'Lora', Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .hearts-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      bottom: -60px;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(-10deg); opacity: 0; }
+      10%  { opacity: .45; }
+      90%  { opacity: .3; }
+      100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+    }
+
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 248, 240, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(232,85,109,.22);
+      border-radius: 2.5rem;
+      padding: 3.5rem 3rem;
+      max-width: 560px; width: 100%;
+      box-shadow: 0 8px 40px rgba(201,58,85,.12), 0 2px 8px rgba(201,58,85,.06);
+      animation: cardIn .9s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes cardIn {
+      from { opacity:0; transform: translateY(40px) scale(.96); }
+      to   { opacity:1; transform: translateY(0)   scale(1);    }
+    }
+
+    .big-heart {
+      font-size: 5rem; line-height: 1;
+      animation: heartbeat 1.6s ease-in-out infinite;
+      display: block; margin-bottom: 1.5rem;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1);   }
+      14%     { transform: scale(1.18); }
+      28%     { transform: scale(1);   }
+      42%     { transform: scale(1.1); }
+      56%     { transform: scale(1);   }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: .5rem;
+      color: var(--rose-dark);
+    }
+    .subtitle {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .love-note {
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+      opacity: .88;
+    }
+    .love-note em {
+      color: var(--rose-dark);
+      font-style: italic;
+    }
+
+    .question {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      font-weight: 700;
+      color: var(--rose-dark);
+      margin-bottom: 2rem;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: .02em;
+      transition: transform .15s ease, box-shadow .15s ease, background .2s;
+      line-height: 1;
+    }
+    .btn:active { transform: scale(.95) !important; }
+
+    .btn-yes {
+      background: var(--rose);
+      color: #fff;
+      padding: .9em 2.2em;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 18px rgba(232,85,109,.4);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1),
+                  font-size .35s cubic-bezier(.34,1.56,.64,1),
+                  padding .35s cubic-bezier(.34,1.56,.64,1),
+                  box-shadow .2s ease;
+    }
+    .btn-yes:hover {
+      background: var(--rose-dark);
+      box-shadow: 0 6px 28px rgba(201,58,85,.5);
+      transform: scale(1.06);
+    }
+
+    .btn-no {
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--muted);
+      padding: .7em 1.6em;
+      font-size: 1rem;
+      transition: font-size .3s ease, padding .3s ease, opacity .3s ease, transform .2s ease;
+    }
+    .btn-no:hover { background: rgba(176,112,128,.08); }
+
+    .divider {
+      margin: 2rem auto;
+      width: 60px; height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--rose), transparent);
+      border: none;
+    }
+
+    #confetti-canvas {
+      position: fixed; inset: 0; pointer-events: none; z-index: 100;
+    }
+
+    .success {
+      display: none;
+      flex-direction: column; align-items: center;
+      animation: cardIn .7s cubic-bezier(.22,1,.36,1) both;
+    }
+    .success.show { display: flex; }
+    .success .big-heart { font-size: 6rem; margin-bottom: 1.2rem; }
+    .success h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--rose-dark);
+      margin-bottom: .6rem;
+    }
+    .success p {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .main-content.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="page">
+  <div class="card">
+
+    <div class="main-content" id="mainContent">
+      <span class="big-heart">💕</span>
+      <h1>Hey, Ari…</h1>
+      <p class="subtitle">there's something I need to ask you</p>
+      <hr class="divider"/>
+      <p class="love-note">
+        Every single day with you feels like the best day of my life.<br/>
+        You make me laugh, you make me feel so <em>seen</em>, and loving you<br/>
+        is the easiest and most wonderful thing I've ever done.<br/><br/>
+        I love you — more than words, more than this silly little page<br/>
+        could ever say. But I had to try. 🌹
+      </p>
+      <p class="question">Will you be my Valentine? 💌</p>
+      <div class="btn-row">
+        <button class="btn btn-yes" id="btnYes" onclick="onYes()">Yes! 💖</button>
+        <button class="btn btn-no"  id="btnNo"  onclick="onNo()">No…</button>
+      </div>
+    </div>
+
+    <div class="success" id="successScreen">
+      <span class="big-heart" style="animation-duration:.9s;">🥰</span>
+      <h2>Yay!! She said Yes!! 🎉</h2>
+      <p>The happiest Valentine's Day, Ari. I love you so much. 💕</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function spawnHearts() {
+    const bg = document.getElementById('heartsBg');
+    const emojis = ['💕','💗','💓','🌸','💝','🌹','✨','💞'];
+    for (let i = 0; i < 22; i++) {
+      const h = document.createElement('span');
+      h.className = 'heart-float';
+      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      h.style.left     = Math.random() * 100 + 'vw';
+      h.style.fontSize = (.8 + Math.random() * 1.4) + 'rem';
+      const dur = 7 + Math.random() * 10;
+      h.style.animationDuration = dur + 's';
+      h.style.animationDelay   = -(Math.random() * dur) + 's';
+      bg.appendChild(h);
+    }
+  })();
+
+  let noCount = 0;
+  const noMessages = [
+    "No…", "Are you sure? 🥺", "Please? 🙏", "Really sure?? 😢",
+    "Last chance…", "Okay fine 😭", "wait–", "👀", "…"
+  ];
+
+  function onNo() {
+    noCount++;
+    const btnYes = document.getElementById('btnYes');
+    const btnNo  = document.getElementById('btnNo');
+
+    const newSize = 1.25 + noCount * 0.45;
+    btnYes.style.fontSize = newSize + 'rem';
+    btnYes.style.padding  = (.9 + noCount * .18) + 'em ' + (2.2 + noCount * .45) + 'em';
+
+    const noSize = Math.max(.55, 1 - noCount * .08);
+    btnNo.style.fontSize = noSize + 'rem';
+    btnNo.style.opacity  = Math.max(.3, 1 - noCount * .08);
+
+    const msg = noMessages[Math.min(noCount, noMessages.length - 1)];
+    btnNo.textContent = msg;
+
+    btnYes.animate([
+      { transform: 'rotate(-4deg) scale(1.05)' },
+      { transform: 'rotate(4deg) scale(1.08)'  },
+      { transform: 'rotate(-2deg) scale(1.05)' },
+      { transform: 'rotate(0deg) scale(1)'     }
+    ], { duration: 380, easing: 'ease-out' });
+  }
+
+  function onYes() {
+    document.getElementById('mainContent').classList.add('hidden');
+    document.getElementById('successScreen').classList.add('show');
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx    = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors  = ['#e8556d','#fde8ec','#f9a8b8','#f7c5d0','#fff','#ffd6e0','#ffafc5'];
+    const shapes  = ['❤','💕','🌸','✨','💖'];
+    const pieces  = Array.from({ length: 130 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * 200,
+      r: 6 + Math.random() * 9,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      shape: shapes[Math.floor(Math.random() * shapes.length)],
+      speed: 2 + Math.random() * 4,
+      spin:  (Math.random() - .5) * .15,
+      angle: Math.random() * Math.PI * 2,
+      drift: (Math.random() - .5) * 1.2,
+      emoji: Math.random() > .55
+    }));
+
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        p.y     += p.speed;
+        p.x     += p.drift;
+        p.angle += p.spin;
+        if (p.emoji) {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.font = p.r * 2 + 'px serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(p.shape, 0, 0);
+          ctx.restore();
+        } else {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r / 2);
+          ctx.restore();
+        }
+      });
+      frame++;
+      if (frame < 220) requestAnimationFrame(draw);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    draw();
+  }
+</script>
+</body>
+</html>
